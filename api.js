@@ -50,7 +50,7 @@ router.route('/etudiants')
     //obtenir tous les étudiants
     .get(function(req, res) {
         var Query = Etudiant.find().sort({'nom':1});
-        Query.select('-_id cle sticker');
+        Query.select('-_id -cle -sticker');
         Query.exec(function (err, etudiants) {
             if (err) throw err;
             res.send(etudiants);
