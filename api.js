@@ -83,7 +83,9 @@ router.route("/etudiants")
 router.route("/etudiants/:code")  //Prend le code permanent dans l'URL. Ex. /etudiant/BOIE10101010
     //Obtenir un seul étudiant
     .get(function(req, res) {
-        Etudiant.find({'code':req.params.code}, function(err, etudiant) {
+        var Query = Etudiant.find({'code':req.params.code});
+        Query.select('-cle -sticker');
+        Query.exec(function (err, etudiant) {
             if (err){
                 res.send(err);
                 return;
