@@ -80,7 +80,7 @@ router.route("/etudiants")
     });
 */
 
-router.route("/etudiants/:code")  //Prend le code permanent dans l'URL. Ex. /etudiant/BOIE10101010
+router.route("/etudiants/:code")  //Prend le code universel dans l'URL. Ex. /etudiant/AB123456
     //Obtenir un seul étudiant
     .get(function(req, res) {
         var Query = Etudiant.find({'code':req.params.code});
