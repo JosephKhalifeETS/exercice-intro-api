@@ -95,17 +95,18 @@ router.route("/etudiants/:code")  //Prend le code universel dans l'URL. Ex. /etu
     });
 
 router.route("/etudiants/:id")
-    //Afficher un étudiant et son message
+    //Modifier un un message
     .put(function(req, res) {
+
+        if(req.body.message == null){
+            res.status(400).json({ erreur: 'Le message doit être fourni dans le corps de la requête' });
+            return;
+        }
+
         Etudiant.findById(req.params.id, function(err, etudiant) {
 
             if (err){
-                res.status(500).json({ erreur: 'Erreur lors de la lecture dans la BD' });
-                return;
-            }
-
-            if(req.body.message == null){
-                res.status(400).json({ erreur: 'Le message doit être fourni dans le corps de la requête' });
+                res.status(400).json({ erreur: 'Erreur lors de l\'accès. Vous avez probablement fourni le mauvais identifiant?' });
                 return;
             }
 
